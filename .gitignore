@@ -1,0 +1,22 @@
+# ── IDE ───────────────────────────────────────────────────────────
+.idea/
+.vscode/
+
+# ── OS ────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Python ────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# ── Environnements & secrets ──────────────────────────────────────
+.env
+.env.local
+.venv/
+venv/
+env/
+data/raw_booking_html/

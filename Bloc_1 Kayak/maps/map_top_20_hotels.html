@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_0105af4f547e50baa36228ff32f64d06 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    <h3 align="center" style="font-size:20px;"><b>Top 20 hôtels</b></h3>
+    
+<div style="position:fixed;bottom:35px;left:35px;width:220px;background:white;
+    border:2px solid grey;z-index:9999;font-size:14px;padding:10px;">
+    <b>Légende</b><br>
+    <span style="color:blue;">●</span> Aix en Provence<br>
+    <span style="color:green;">●</span> Avignon<br>
+    <span style="color:red;">●</span> Bormes les Mimosas<br>
+    <span style="color:purple;">●</span> Nimes<br>
+    <span style="color:orange;">●</span> Strasbourg
+</div>
+    
+<div style="position:fixed;top:90px;right:18px;width:320px;max-height:72vh;overflow-y:auto;
+    background:rgba(255,255,255,0.96);border:1px solid #999;z-index:9999;
+    padding:12px;font-size:13px;border-radius:6px;">
+    <h4 style="margin:0 0 10px 0;">Top 20 hôtels</h4>
+    <ol style="padding-left:22px;margin:0;"><li style="margin-bottom:8px;"><b>The Little House</b><br><span style="color:#555;">Bormes les Mimosas – 9.8</span></li><li style="margin-bottom:8px;"><b>Apartment 40m2-Air conditioning-Elevato...</b><br><span style="color:#555;">Avignon – 9.8</span></li><li style="margin-bottom:8px;"><b>Chez Flo</b><br><span style="color:#555;">Avignon – 9.7</span></li><li style="margin-bottom:8px;"><b>Duplex-Ceiling height 1,9m-Free private...</b><br><span style="color:#555;">Avignon – 9.7</span></li><li style="margin-bottom:8px;"><b>Roma Divine home cinéma et jardin</b><br><span style="color:#555;">Nimes – 9.7</span></li><li style="margin-bottom:8px;"><b>AfroBoHome, Expérience Atypique, clim, ...</b><br><span style="color:#555;">Nimes – 9.7</span></li><li style="margin-bottom:8px;"><b>room five - parking, balnéothérapie, pl...</b><br><span style="color:#555;">Montauban – 9.6</span></li><li style="margin-bottom:8px;"><b>Le Terra Cotta - proche Hyper centre</b><br><span style="color:#555;">Montauban – 9.6</span></li><li style="margin-bottom:8px;"><b>La Recampado</b><br><span style="color:#555;">Bormes les Mimosas – 9.6</span></li><li style="margin-bottom:8px;"><b>Appartement 4 à 8 personnes, Spacieux d...</b><br><span style="color:#555;">Nimes – 9.6</span></li><li style="margin-bottom:8px;"><b>Le Mas de la Palmeraie - Appartement da...</b><br><span style="color:#555;">Bormes les Mimosas – 9.4</span></li><li style="margin-bottom:8px;"><b>Villa Nais B&B - Piscine & Padel proche...</b><br><span style="color:#555;">Bormes les Mimosas – 9.4</span></li><li style="margin-bottom:8px;"><b>Vanille Bourbon</b><br><span style="color:#555;">Montauban – 9.4</span></li><li style="margin-bottom:8px;"><b>Le Mas des Oliviers Nîmes</b><br><span style="color:#555;">Nimes – 9.4</span></li><li style="margin-bottom:8px;"><b>Villa Merveille</b><br><span style="color:#555;">Bormes les Mimosas – 9.4</span></li><li style="margin-bottom:8px;"><b>Le studio TAHITI 4 pers 600m de la plag...</b><br><span style="color:#555;">Bormes les Mimosas – 9.3</span></li><li style="margin-bottom:8px;"><b>Chez Juliette, proche Place Nationale a...</b><br><span style="color:#555;">Montauban – 9.2</span></li><li style="margin-bottom:8px;"><b>Appartement des Augustins</b><br><span style="color:#555;">Aix en Provence – 9.2</span></li><li style="margin-bottom:8px;"><b>Strasbourg Centre Epine</b><br><span style="color:#555;">Strasbourg – 9.1</span></li><li style="margin-bottom:8px;"><b>Izabel Etxea</b><br><span style="color:#555;">Bayonne – 9.1</span></li></ol>
+</div>
+    
+            <div class="folium-map" id="map_0105af4f547e50baa36228ff32f64d06" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_0105af4f547e50baa36228ff32f64d06 = L.map(
+                "map_0105af4f547e50baa36228ff32f64d06",
+                {
+                    center: [43.889273449919244, 4.351175858734819],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_5f152b53ef5c1295ad99bd4801a19493 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_5f152b53ef5c1295ad99bd4801a19493.addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var circle_marker_32170c1e346d21f71dfd0ae26c1dd9b7 = L.circleMarker(
+                [43.1506968, 6.3761958511015315],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_694dd890483f5f60bf3e04acf10f4b10 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_71018d224f27c8893ec93f06c51e2b25 = $(`<div id="html_71018d224f27c8893ec93f06c51e2b25" style="width: 100.0%; height: 100.0%;"><b>#1 The Little House</b><br>Ville : Bormes les Mimosas<br>Score : 9.8<br><a href='https://www.booking.com/hotel/fr/the-little-house-bormes-les-mimosas.fr.html?aid=304142&label=gen173nr-10CAQoggJCGXNlYXJjaF9ib3JtZXMgbGVzIG1pbW9zYXNIDVgEaE2IAQGYATO4ARfIAQzYAQPoAQH4AQGIAgGoAgG4ArXltM8GwAIB0gIkZWRkZDA1NWItMWE1Zi00M2IzLWI1NmYtYWRmNGJmMGI1MTMx2AIB4AIB&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=8&hapos=8&sr_order=popularity&srpvid=5dde975a972e00f6&srepoch=1777152695&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_694dd890483f5f60bf3e04acf10f4b10.setContent(html_71018d224f27c8893ec93f06c51e2b25);
+            
+        
+
+        circle_marker_32170c1e346d21f71dfd0ae26c1dd9b7.bindPopup(popup_694dd890483f5f60bf3e04acf10f4b10)
+        ;
+
+        
+    
+    
+            circle_marker_32170c1e346d21f71dfd0ae26c1dd9b7.bindTooltip(
+                `<div>
+                     1. The Little House
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_0fa911ea9eccf98735fd22bb5c46aaa8 = L.marker(
+                [43.1506968, 6.3761958511015315],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_d95cde19589a02b4a20e4db43fddd90b = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e1\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_0fa911ea9eccf98735fd22bb5c46aaa8.setIcon(div_icon_d95cde19589a02b4a20e4db43fddd90b);
+            
+    
+            var circle_marker_41fae6b97ab93855a5962ac25fb90357 = L.circleMarker(
+                [43.175811536709745, 6.361803563638888],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_8eaf037c60390726faa7df27cb02c824 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_841c4d918ec4657b5b9926d58ebfb448 = $(`<div id="html_841c4d918ec4657b5b9926d58ebfb448" style="width: 100.0%; height: 100.0%;"><b>#9 La Recampado</b><br>Ville : Bormes les Mimosas<br>Score : 9.6<br><a href='https://www.booking.com/hotel/fr/la-recampado-bormes-les-mimosas.fr.html?aid=304142&label=gen173nr-10CAQoggJCGXNlYXJjaF9ib3JtZXMgbGVzIG1pbW9zYXNIDVgEaE2IAQGYATO4ARfIAQzYAQPoAQH4AQGIAgGoAgG4ArXltM8GwAIB0gIkZWRkZDA1NWItMWE1Zi00M2IzLWI1NmYtYWRmNGJmMGI1MTMx2AIB4AIB&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=1&hapos=1&sr_order=popularity&srpvid=5dde975a972e00f6&srepoch=1777152695&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_8eaf037c60390726faa7df27cb02c824.setContent(html_841c4d918ec4657b5b9926d58ebfb448);
+            
+        
+
+        circle_marker_41fae6b97ab93855a5962ac25fb90357.bindPopup(popup_8eaf037c60390726faa7df27cb02c824)
+        ;
+
+        
+    
+    
+            circle_marker_41fae6b97ab93855a5962ac25fb90357.bindTooltip(
+                `<div>
+                     9. La Recampado
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_66b62319edcf2bb5f8e8af39adc78e15 = L.marker(
+                [43.175811536709745, 6.361803563638888],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_22ff0ed06e2b08f28b68dce224351a4e = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e9\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_66b62319edcf2bb5f8e8af39adc78e15.setIcon(div_icon_22ff0ed06e2b08f28b68dce224351a4e);
+            
+    
+            var circle_marker_b6a33ec7823ee71df159ddb82b511839 = L.circleMarker(
+                [43.17927563832489, 6.319312048272989],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_474bf20a502f0323d7978832fe825587 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_102fefe2b0f9944fd1458d87fb639002 = $(`<div id="html_102fefe2b0f9944fd1458d87fb639002" style="width: 100.0%; height: 100.0%;"><b>#11 Le Mas de la Palmeraie - Appartement dans propriété privée au calme avec piscine et tennis</b><br>Ville : Bormes les Mimosas<br>Score : 9.4<br><a href='https://www.booking.com/hotel/fr/le-mas-de-la-palmeraie-appartement-dans-propriete-privee-au-calme-avec-piscine-e.fr.html?aid=304142&label=gen173nr-10CAQoggJCGXNlYXJjaF9ib3JtZXMgbGVzIG1pbW9zYXNIDVgEaE2IAQGYATO4ARfIAQzYAQPoAQH4AQGIAgGoAgG4ArXltM8GwAIB0gIkZWRkZDA1NWItMWE1Zi00M2IzLWI1NmYtYWRmNGJmMGI1MTMx2AIB4AIB&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=6&hapos=6&sr_order=popularity&srpvid=5dde975a972e00f6&srepoch=1777152695&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_474bf20a502f0323d7978832fe825587.setContent(html_102fefe2b0f9944fd1458d87fb639002);
+            
+        
+
+        circle_marker_b6a33ec7823ee71df159ddb82b511839.bindPopup(popup_474bf20a502f0323d7978832fe825587)
+        ;
+
+        
+    
+    
+            circle_marker_b6a33ec7823ee71df159ddb82b511839.bindTooltip(
+                `<div>
+                     11. Le Mas de la Palmeraie - Appartement dans propriété privée au calme avec piscine et tennis
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_9817ab42edb78361ebd434c8e537f353 = L.marker(
+                [43.17927563832489, 6.319312048272989],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_46763c03f137994a728b590edef33036 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e11\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_9817ab42edb78361ebd434c8e537f353.setIcon(div_icon_46763c03f137994a728b590edef33036);
+            
+    
+            var circle_marker_621b7f163827a04638cd1e36090b7c73 = L.circleMarker(
+                [43.1506968, 6.307661148898468],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_4577303f1cbfbb178bf311500edee353 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_5e6c1b626297b745bd72d24c9556f265 = $(`<div id="html_5e6c1b626297b745bd72d24c9556f265" style="width: 100.0%; height: 100.0%;"><b>#12 Villa Nais B&B - Piscine & Padel proche plages</b><br>Ville : Bormes les Mimosas<br>Score : 9.4<br><a href='https://www.booking.com/hotel/fr/villa-nais.fr.html?aid=304142&label=gen173nr-10CAQoggJCGXNlYXJjaF9ib3JtZXMgbGVzIG1pbW9zYXNIDVgEaE2IAQGYATO4ARfIAQzYAQPoAQH4AQGIAgGoAgG4ArXltM8GwAIB0gIkZWRkZDA1NWItMWE1Zi00M2IzLWI1NmYtYWRmNGJmMGI1MTMx2AIB4AIB&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=3&hapos=3&sr_order=popularity&srpvid=5dde975a972e00f6&srepoch=1777152695&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_4577303f1cbfbb178bf311500edee353.setContent(html_5e6c1b626297b745bd72d24c9556f265);
+            
+        
+
+        circle_marker_621b7f163827a04638cd1e36090b7c73.bindPopup(popup_4577303f1cbfbb178bf311500edee353)
+        ;
+
+        
+    
+    
+            circle_marker_621b7f163827a04638cd1e36090b7c73.bindTooltip(
+                `<div>
+                     12. Villa Nais B&B - Piscine & Padel proche plages
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_b29010c570a5a46afbcf9e0606a51bcc = L.marker(
+                [43.1506968, 6.307661148898468],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_16931b431dfd5c5ded0fd2bff08474f7 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e12\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_b29010c570a5a46afbcf9e0606a51bcc.setIcon(div_icon_16931b431dfd5c5ded0fd2bff08474f7);
+            
+    
+            var circle_marker_3b43577229a71aa46ada815c009da713 = L.circleMarker(
+                [43.12558206329025, 6.322053436361112],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_01a5e9367c2110ad31a46a7e3264ce2c = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_f4a30a22be690ea86a866bc17eddc6f5 = $(`<div id="html_f4a30a22be690ea86a866bc17eddc6f5" style="width: 100.0%; height: 100.0%;"><b>#15 Villa Merveille</b><br>Ville : Bormes les Mimosas<br>Score : 9.4<br><a href='https://www.booking.com/hotel/fr/merveille.fr.html?aid=304142&label=gen173nr-10CAQoggJCGXNlYXJjaF9ib3JtZXMgbGVzIG1pbW9zYXNIDVgEaE2IAQGYATO4ARfIAQzYAQPoAQH4AQGIAgGoAgG4ArXltM8GwAIB0gIkZWRkZDA1NWItMWE1Zi00M2IzLWI1NmYtYWRmNGJmMGI1MTMx2AIB4AIB&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=7&hapos=7&sr_order=popularity&srpvid=5dde975a972e00f6&srepoch=1777152695&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_01a5e9367c2110ad31a46a7e3264ce2c.setContent(html_f4a30a22be690ea86a866bc17eddc6f5);
+            
+        
+
+        circle_marker_3b43577229a71aa46ada815c009da713.bindPopup(popup_01a5e9367c2110ad31a46a7e3264ce2c)
+        ;
+
+        
+    
+    
+            circle_marker_3b43577229a71aa46ada815c009da713.bindTooltip(
+                `<div>
+                     15. Villa Merveille
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_d2973e93a00978fce55bdc80171868c3 = L.marker(
+                [43.12558206329025, 6.322053436361112],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_743daec630d4e19386e05400408ab2a0 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e15\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_d2973e93a00978fce55bdc80171868c3.setIcon(div_icon_743daec630d4e19386e05400408ab2a0);
+            
+    
+            var circle_marker_b477b200071087f881195abc8095d6ad = L.circleMarker(
+                [43.12211796167511, 6.3645449517270105],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_cbb01952133e9b4ec5c1bf64ae6442f6 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_08b917011e52c4da923228ebe925ee2d = $(`<div id="html_08b917011e52c4da923228ebe925ee2d" style="width: 100.0%; height: 100.0%;"><b>#16 Le studio TAHITI 4 pers 600m de la plage la favière</b><br>Ville : Bormes les Mimosas<br>Score : 9.3<br><a href='https://www.booking.com/hotel/fr/le-studio-tahiti-4-pers-200m-de-la-plage.fr.html?aid=304142&label=gen173nr-10CAQoggJCGXNlYXJjaF9ib3JtZXMgbGVzIG1pbW9zYXNIDVgEaE2IAQGYATO4ARfIAQzYAQPoAQH4AQGIAgGoAgG4ArXltM8GwAIB0gIkZWRkZDA1NWItMWE1Zi00M2IzLWI1NmYtYWRmNGJmMGI1MTMx2AIB4AIB&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=2&hapos=2&sr_order=popularity&srpvid=5dde975a972e00f6&srepoch=1777152695&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_cbb01952133e9b4ec5c1bf64ae6442f6.setContent(html_08b917011e52c4da923228ebe925ee2d);
+            
+        
+
+        circle_marker_b477b200071087f881195abc8095d6ad.bindPopup(popup_cbb01952133e9b4ec5c1bf64ae6442f6)
+        ;
+
+        
+    
+    
+            circle_marker_b477b200071087f881195abc8095d6ad.bindTooltip(
+                `<div>
+                     16. Le studio TAHITI 4 pers 600m de la plage la favière
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_8571bbaf8a8c5aba862ccf692d31d5c9 = L.marker(
+                [43.12211796167511, 6.3645449517270105],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_c2f8995ee533664ebc47be20b585bf85 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e16\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_8571bbaf8a8c5aba862ccf692d31d5c9.setIcon(div_icon_c2f8995ee533664ebc47be20b585bf85);
+            
+    
+            var circle_marker_715d53f5c1168c8a4d4729c3e863935c = L.circleMarker(
+                [43.9492493, 4.8406256010145015],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_c9715d85796ad8474500e2d87a148bb3 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_078ba1df50795a4af6450e27fe914608 = $(`<div id="html_078ba1df50795a4af6450e27fe914608" style="width: 100.0%; height: 100.0%;"><b>#2 Apartment 40m2-Air conditioning-Elevator-Underground parking-Self checkin! Appart climatisé 40m2-Ascenseur-Parking souterrain -Arrivée autonome</b><br>Ville : Avignon<br>Score : 9.8<br><a href='https://www.booking.com/hotel/fr/appart-parking-arrivee-autonome.fr.html?aid=304142&label=gen173bo-10CAQoggJCFnNlYXJjaF9hdmlnbm9uLCBmcmFuY2VIDVgDaE2IAQGYATO4ARfIAQzYAQPoAQH4AQGIAgGYAgKoAgG4AuWQrNAGwAIB0gIkODA0ODMwYWEtNWU1Yi00ZmZlLTgzM2QtZjU3ZjBjNWE2ZGZj2AIB4AIB&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=5&hapos=5&sr_order=popularity&srpvid=ccd358f231fb017d&srepoch=1779107945&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_c9715d85796ad8474500e2d87a148bb3.setContent(html_078ba1df50795a4af6450e27fe914608);
+            
+        
+
+        circle_marker_715d53f5c1168c8a4d4729c3e863935c.bindPopup(popup_c9715d85796ad8474500e2d87a148bb3)
+        ;
+
+        
+    
+    
+            circle_marker_715d53f5c1168c8a4d4729c3e863935c.bindTooltip(
+                `<div>
+                     2. Apartment 40m2-Air conditioning-Elevator-Underground parking-Self checkin! Appart climatisé 40m2-Ascenseur-Parking souterrain -Arrivée autonome
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_830007d2d7583a643ba472c0a6bd2fc9 = L.marker(
+                [43.9492493, 4.8406256010145015],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_88c6ff8573d05e157ae539b44d048202 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e2\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_830007d2d7583a643ba472c0a6bd2fc9.setIcon(div_icon_88c6ff8573d05e157ae539b44d048202);
+            
+    
+            var circle_marker_6446954a32793589a297c4804000bdbd = L.circleMarker(
+                [43.974364036709744, 4.785761047411589],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_e9fac222f8a8c4dd6b2c762450c864ce = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_2c0fcd22cfa4b9b830b887d62be25c8f = $(`<div id="html_2c0fcd22cfa4b9b830b887d62be25c8f" style="width: 100.0%; height: 100.0%;"><b>#3 Chez Flo</b><br>Ville : Avignon<br>Score : 9.7<br><a href='https://www.booking.com/hotel/fr/chez-flo-avignon.fr.html?aid=304142&label=gen173bo-10CAQoggJCFnNlYXJjaF9hdmlnbm9uLCBmcmFuY2VIDVgDaE2IAQGYATO4ARfIAQzYAQPoAQH4AQGIAgGYAgKoAgG4AuWQrNAGwAIB0gIkODA0ODMwYWEtNWU1Yi00ZmZlLTgzM2QtZjU3ZjBjNWE2ZGZj2AIB4AIB&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=6&hapos=6&sr_order=popularity&srpvid=ccd358f231fb017d&srepoch=1779107945&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_e9fac222f8a8c4dd6b2c762450c864ce.setContent(html_2c0fcd22cfa4b9b830b887d62be25c8f);
+            
+        
+
+        circle_marker_6446954a32793589a297c4804000bdbd.bindPopup(popup_e9fac222f8a8c4dd6b2c762450c864ce)
+        ;
+
+        
+    
+    
+            circle_marker_6446954a32793589a297c4804000bdbd.bindTooltip(
+                `<div>
+                     3. Chez Flo
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_4f4cf6477f457d83e5f98c401199a4ce = L.marker(
+                [43.974364036709744, 4.785761047411589],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_83d8740875b201f1522a10f2892b594b = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e3\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_4f4cf6477f457d83e5f98c401199a4ce.setIcon(div_icon_83d8740875b201f1522a10f2892b594b);
+            
+    
+            var circle_marker_5d628ef99e69119a44a29d5a48005a6d = L.circleMarker(
+                [43.92067046167511, 4.782983095330429],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_02e8df10e97e2ff89a4edcd5c5619cd5 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_3173b4a6e0ddb127f5b4a893e76b58f4 = $(`<div id="html_3173b4a6e0ddb127f5b4a893e76b58f4" style="width: 100.0%; height: 100.0%;"><b>#4 Duplex-Ceiling height 1,9m-Free private parking-Self check in !! Duplex climatisé-Hauteur sous plafond 1,9m-Parking privé gratuit-Arrivée autonome !!</b><br>Ville : Avignon<br>Score : 9.7<br><a href='https://www.booking.com/hotel/fr/duplex-climatise-au-centre-ville-d-avignon-avec-parking-prive-gratuit.fr.html?aid=304142&label=gen173bo-10CAQoggJCFnNlYXJjaF9hdmlnbm9uLCBmcmFuY2VIDVgDaE2IAQGYATO4ARfIAQzYAQPoAQH4AQGIAgGYAgKoAgG4AuWQrNAGwAIB0gIkODA0ODMwYWEtNWU1Yi00ZmZlLTgzM2QtZjU3ZjBjNWE2ZGZj2AIB4AIB&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=10&hapos=10&sr_order=popularity&srpvid=ccd358f231fb017d&srepoch=1779107945&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_02e8df10e97e2ff89a4edcd5c5619cd5.setContent(html_3173b4a6e0ddb127f5b4a893e76b58f4);
+            
+        
+
+        circle_marker_5d628ef99e69119a44a29d5a48005a6d.bindPopup(popup_02e8df10e97e2ff89a4edcd5c5619cd5)
+        ;
+
+        
+    
+    
+            circle_marker_5d628ef99e69119a44a29d5a48005a6d.bindTooltip(
+                `<div>
+                     4. Duplex-Ceiling height 1,9m-Free private parking-Self check in !! Duplex climatisé-Hauteur sous plafond 1,9m-Parking privé gratuit-Arrivée autonome !!
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_7067507a1f34387c891ea7ff4cf1c6d8 = L.marker(
+                [43.92067046167511, 4.782983095330429],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_950f59376ac2a1821457dff77758a083 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e4\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_7067507a1f34387c891ea7ff4cf1c6d8.setIcon(div_icon_950f59376ac2a1821457dff77758a083);
+            
+    
+            var circle_marker_d4d145694636af730801b22efe4db571 = L.circleMarker(
+                [43.8374249, 4.394727959117799],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_7c47b43bdde00901c4f2d53c73e2f87f = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_a74cc502d239ce085a98126714f8d412 = $(`<div id="html_a74cc502d239ce085a98126714f8d412" style="width: 100.0%; height: 100.0%;"><b>#5 Roma Divine home cinéma et jardin</b><br>Ville : Nimes<br>Score : 9.7<br><a href='https://www.booking.com/hotel/fr/roma-divine-home-cinema-jardinet-hyper-centre.fr.html?aid=304142&label=gen173nr-10CAQoggJCFHNlYXJjaF9uaW1lcywgZnJhbmNlSA1YBGhNiAEBmAEzuAEXyAEM2AED6AEB-AEBiAIBqAIBuALckKzQBsACAdICJDc5OGUzZDg4LWVhOGYtNGI5NC1iZjRhLWViZmU0MjY5MGMwZtgCAeACAQ&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=4&hapos=4&sr_order=popularity&srpvid=9a3a58ee0d620125&srepoch=1779107935&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_7c47b43bdde00901c4f2d53c73e2f87f.setContent(html_a74cc502d239ce085a98126714f8d412);
+            
+        
+
+        circle_marker_d4d145694636af730801b22efe4db571.bindPopup(popup_7c47b43bdde00901c4f2d53c73e2f87f)
+        ;
+
+        
+    
+    
+            circle_marker_d4d145694636af730801b22efe4db571.bindTooltip(
+                `<div>
+                     5. Roma Divine home cinéma et jardin
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_ed4c5aa2fd3a8775caa6811dc69e0b7f = L.marker(
+                [43.8374249, 4.394727959117799],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_7d666b144e99cb6f8f0f8bdaf0caec93 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e5\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_ed4c5aa2fd3a8775caa6811dc69e0b7f.setIcon(div_icon_7d666b144e99cb6f8f0f8bdaf0caec93);
+            
+    
+            var circle_marker_d7d99a8c0de13bd7a408da7b9a913f96 = L.circleMarker(
+                [43.866424900000005, 4.3600687],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_2a19dcc97a642697ce31f99689cddd77 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_ba6a9499d6594f8afd941739cbec9b3a = $(`<div id="html_ba6a9499d6594f8afd941739cbec9b3a" style="width: 100.0%; height: 100.0%;"><b>#6 AfroBoHome, Expérience Atypique, clim, 2 à 6 personnes, Proche centre Nîmes, Garage clos</b><br>Ville : Nimes<br>Score : 9.7<br><a href='https://www.booking.com/hotel/fr/afrobohome-terrasse-paysagere-et-amenagee-parking-gratuit-climatisation-centre-v.fr.html?aid=304142&label=gen173nr-10CAQoggJCFHNlYXJjaF9uaW1lcywgZnJhbmNlSA1YBGhNiAEBmAEzuAEXyAEM2AED6AEB-AEBiAIBqAIBuALckKzQBsACAdICJDc5OGUzZDg4LWVhOGYtNGI5NC1iZjRhLWViZmU0MjY5MGMwZtgCAeACAQ&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=9&hapos=9&sr_order=popularity&srpvid=9a3a58ee0d620125&srepoch=1779107935&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_2a19dcc97a642697ce31f99689cddd77.setContent(html_ba6a9499d6594f8afd941739cbec9b3a);
+            
+        
+
+        circle_marker_d7d99a8c0de13bd7a408da7b9a913f96.bindPopup(popup_2a19dcc97a642697ce31f99689cddd77)
+        ;
+
+        
+    
+    
+            circle_marker_d7d99a8c0de13bd7a408da7b9a913f96.bindTooltip(
+                `<div>
+                     6. AfroBoHome, Expérience Atypique, clim, 2 à 6 personnes, Proche centre Nîmes, Garage clos
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_dbe3b15e2553b923cfdd9d3a90285345 = L.marker(
+                [43.866424900000005, 4.3600687],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_6625812203726657ada92c1210fa869e = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e6\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_dbe3b15e2553b923cfdd9d3a90285345.setIcon(div_icon_6625812203726657ada92c1210fa869e);
+            
+    
+            var circle_marker_023fb4df8306b38f4d45a371df291481 = L.circleMarker(
+                [43.8374249, 4.314318477964506],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_de5b43604fc19573c9632af9a31bba0b = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_92db35f3dc14ef881e1ae39578c59d0d = $(`<div id="html_92db35f3dc14ef881e1ae39578c59d0d" style="width: 100.0%; height: 100.0%;"><b>#10 Appartement 4 à 8 personnes, Spacieux de Standing Classé 4 Etoiles</b><br>Ville : Nimes<br>Score : 9.6<br><a href='https://www.booking.com/hotel/fr/appartement-spacieux-de-grand-standing-de-200-m2.fr.html?aid=304142&label=gen173nr-10CAQoggJCFHNlYXJjaF9uaW1lcywgZnJhbmNlSA1YBGhNiAEBmAEzuAEXyAEM2AED6AEB-AEBiAIBqAIBuALckKzQBsACAdICJDc5OGUzZDg4LWVhOGYtNGI5NC1iZjRhLWViZmU0MjY5MGMwZtgCAeACAQ&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=2&hapos=2&sr_order=popularity&srpvid=9a3a58ee0d620125&srepoch=1779107935&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_de5b43604fc19573c9632af9a31bba0b.setContent(html_92db35f3dc14ef881e1ae39578c59d0d);
+            
+        
+
+        circle_marker_023fb4df8306b38f4d45a371df291481.bindPopup(popup_de5b43604fc19573c9632af9a31bba0b)
+        ;
+
+        
+    
+    
+            circle_marker_023fb4df8306b38f4d45a371df291481.bindTooltip(
+                `<div>
+                     10. Appartement 4 à 8 personnes, Spacieux de Standing Classé 4 Etoiles
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_e3c1e6343adafb01bd4e9415d66b355b = L.marker(
+                [43.8374249, 4.314318477964506],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_3b5446d82de71e6802c8ce851e96b4ba = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e10\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_e3c1e6343adafb01bd4e9415d66b355b.setIcon(div_icon_3b5446d82de71e6802c8ce851e96b4ba);
+            
+    
+            var circle_marker_2108551721f668fa4fd3f1ac22266a06 = L.circleMarker(
+                [43.8124249, 4.3600687],
+                {"bubblingMouseEvents": true, "color": "purple", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_b22ec82a031251415624844f224abffc = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_bdf587867cb18e88ce383e191d768e35 = $(`<div id="html_bdf587867cb18e88ce383e191d768e35" style="width: 100.0%; height: 100.0%;"><b>#14 Le Mas des Oliviers Nîmes</b><br>Ville : Nimes<br>Score : 9.4<br><a href='https://www.booking.com/hotel/fr/le-mas-des-oliviers-nimes.fr.html?aid=304142&label=gen173nr-10CAQoggJCFHNlYXJjaF9uaW1lcywgZnJhbmNlSA1YBGhNiAEBmAEzuAEXyAEM2AED6AEB-AEBiAIBqAIBuALckKzQBsACAdICJDc5OGUzZDg4LWVhOGYtNGI5NC1iZjRhLWViZmU0MjY5MGMwZtgCAeACAQ&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=5&hapos=5&sr_order=popularity&srpvid=9a3a58ee0d620125&srepoch=1779107935&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_b22ec82a031251415624844f224abffc.setContent(html_bdf587867cb18e88ce383e191d768e35);
+            
+        
+
+        circle_marker_2108551721f668fa4fd3f1ac22266a06.bindPopup(popup_b22ec82a031251415624844f224abffc)
+        ;
+
+        
+    
+    
+            circle_marker_2108551721f668fa4fd3f1ac22266a06.bindTooltip(
+                `<div>
+                     14. Le Mas des Oliviers Nîmes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_26da57ad9bcd9c416158edc7eab0b9fb = L.marker(
+                [43.8124249, 4.3600687],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_c3213a3655f63c6abd29c90cf5786d4c = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e14\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_26da57ad9bcd9c416158edc7eab0b9fb.setIcon(div_icon_c3213a3655f63c6abd29c90cf5786d4c);
+            
+    
+            var circle_marker_3af9f55e1bef1e6f6d37358a091e2030 = L.circleMarker(
+                [44.0175835, 1.3897634941950892],
+                {"bubblingMouseEvents": true, "color": "cadetblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_225954991edbeaf8421d50599f8b5319 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_be7f4ca619dfdd72f6ab3c4c21baad76 = $(`<div id="html_be7f4ca619dfdd72f6ab3c4c21baad76" style="width: 100.0%; height: 100.0%;"><b>#7 room five - parking, balnéothérapie, place nationale, un havre de paix</b><br>Ville : Montauban<br>Score : 9.6<br><a href='https://www.booking.com/hotel/fr/room-five-montauban.fr.html?aid=304142&label=gen173bo-10CAQoggJCGHNlYXJjaF9tb250YXViYW4sIGZyYW5jZUgNWANoTYgBAZgBM7gBF8gBDNgBA-gBAfgBAYgCAZgCAqgCAbgCwJes0AbAAgHSAiQ3MjhmODk5Mi0yM2YxLTRjOGYtYjljZS0wNzc2NmU4NTlhYmbYAgHgAgE&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=2&hapos=2&sr_order=popularity&srpvid=00a55aa0370c01b3&srepoch=1779108803&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_225954991edbeaf8421d50599f8b5319.setContent(html_be7f4ca619dfdd72f6ab3c4c21baad76);
+            
+        
+
+        circle_marker_3af9f55e1bef1e6f6d37358a091e2030.bindPopup(popup_225954991edbeaf8421d50599f8b5319)
+        ;
+
+        
+    
+    
+            circle_marker_3af9f55e1bef1e6f6d37358a091e2030.bindTooltip(
+                `<div>
+                     7. room five - parking, balnéothérapie, place nationale, un havre de paix
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_660f065241459b25cac4bed6d15c08bd = L.marker(
+                [44.0175835, 1.3897634941950892],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_0df8393269eb5885327fd803f876d1b4 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e7\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_660f065241459b25cac4bed6d15c08bd.setIcon(div_icon_0df8393269eb5885327fd803f876d1b4);
+            
+    
+            var circle_marker_2e0960ece39b66260b071f9278a823d9 = L.circleMarker(
+                [44.046583500000004, 1.3549991],
+                {"bubblingMouseEvents": true, "color": "cadetblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_3da0b1e5456bc728450795c5ff1a8896 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_c883ac7a32cfbdf3201ad3c421c44ac6 = $(`<div id="html_c883ac7a32cfbdf3201ad3c421c44ac6" style="width: 100.0%; height: 100.0%;"><b>#8 Le Terra Cotta - proche Hyper centre</b><br>Ville : Montauban<br>Score : 9.6<br><a href='https://www.booking.com/hotel/fr/le-terra-cotta-proche-hyper-centre.fr.html?aid=304142&label=gen173bo-10CAQoggJCGHNlYXJjaF9tb250YXViYW4sIGZyYW5jZUgNWANoTYgBAZgBM7gBF8gBDNgBA-gBAfgBAYgCAZgCAqgCAbgCwJes0AbAAgHSAiQ3MjhmODk5Mi0yM2YxLTRjOGYtYjljZS0wNzc2NmU4NTlhYmbYAgHgAgE&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=5&hapos=5&sr_order=popularity&srpvid=00a55aa0370c01b3&srepoch=1779108803&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_3da0b1e5456bc728450795c5ff1a8896.setContent(html_c883ac7a32cfbdf3201ad3c421c44ac6);
+            
+        
+
+        circle_marker_2e0960ece39b66260b071f9278a823d9.bindPopup(popup_3da0b1e5456bc728450795c5ff1a8896)
+        ;
+
+        
+    
+    
+            circle_marker_2e0960ece39b66260b071f9278a823d9.bindTooltip(
+                `<div>
+                     8. Le Terra Cotta - proche Hyper centre
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_d2a1d518451dc8aa2940d3db0b1b9e6c = L.marker(
+                [44.046583500000004, 1.3549991],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_654c64837ad44af3536168dc009feef7 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e8\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_d2a1d518451dc8aa2940d3db0b1b9e6c.setIcon(div_icon_654c64837ad44af3536168dc009feef7);
+            
+    
+            var circle_marker_cb76fad5469fc6370450d27be1887062 = L.circleMarker(
+                [44.0175835, 1.309110099662482],
+                {"bubblingMouseEvents": true, "color": "cadetblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_66574273ba0386aa12f48e282e8082ad = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_6a259669f790b86684e209d6210f4fd4 = $(`<div id="html_6a259669f790b86684e209d6210f4fd4" style="width: 100.0%; height: 100.0%;"><b>#13 Vanille Bourbon</b><br>Ville : Montauban<br>Score : 9.4<br><a href='https://www.booking.com/hotel/fr/vanille-bourbon.fr.html?aid=304142&label=gen173bo-10CAQoggJCGHNlYXJjaF9tb250YXViYW4sIGZyYW5jZUgNWANoTYgBAZgBM7gBF8gBDNgBA-gBAfgBAYgCAZgCAqgCAbgCwJes0AbAAgHSAiQ3MjhmODk5Mi0yM2YxLTRjOGYtYjljZS0wNzc2NmU4NTlhYmbYAgHgAgE&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=4&hapos=4&sr_order=popularity&srpvid=00a55aa0370c01b3&srepoch=1779108803&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_66574273ba0386aa12f48e282e8082ad.setContent(html_6a259669f790b86684e209d6210f4fd4);
+            
+        
+
+        circle_marker_cb76fad5469fc6370450d27be1887062.bindPopup(popup_66574273ba0386aa12f48e282e8082ad)
+        ;
+
+        
+    
+    
+            circle_marker_cb76fad5469fc6370450d27be1887062.bindTooltip(
+                `<div>
+                     13. Vanille Bourbon
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_fc095cfdb6cc4ab758467524b6887eb3 = L.marker(
+                [44.0175835, 1.309110099662482],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_5f957f9697d400c3bf21279f97d6bc23 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e13\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_fc095cfdb6cc4ab758467524b6887eb3.setIcon(div_icon_5f957f9697d400c3bf21279f97d6bc23);
+            
+    
+            var circle_marker_603ca04f52f0db657ae86e7a155f9961 = L.circleMarker(
+                [43.9925835, 1.3549991],
+                {"bubblingMouseEvents": true, "color": "cadetblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_ef33fd31e196fa19f22daeed7caf4608 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_b4855ea74dcc2e3caef68cea711ad07f = $(`<div id="html_b4855ea74dcc2e3caef68cea711ad07f" style="width: 100.0%; height: 100.0%;"><b>#17 Chez Juliette, proche Place Nationale avec parking</b><br>Ville : Montauban<br>Score : 9.2<br><a href='https://www.booking.com/hotel/fr/chez-juliette-close-to-place-nationale-amp-parking.fr.html?aid=304142&label=gen173bo-10CAQoggJCGHNlYXJjaF9tb250YXViYW4sIGZyYW5jZUgNWANoTYgBAZgBM7gBF8gBDNgBA-gBAfgBAYgCAZgCAqgCAbgCwJes0AbAAgHSAiQ3MjhmODk5Mi0yM2YxLTRjOGYtYjljZS0wNzc2NmU4NTlhYmbYAgHgAgE&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=3&hapos=3&sr_order=popularity&srpvid=00a55aa0370c01b3&srepoch=1779108803&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_ef33fd31e196fa19f22daeed7caf4608.setContent(html_b4855ea74dcc2e3caef68cea711ad07f);
+            
+        
+
+        circle_marker_603ca04f52f0db657ae86e7a155f9961.bindPopup(popup_ef33fd31e196fa19f22daeed7caf4608)
+        ;
+
+        
+    
+    
+            circle_marker_603ca04f52f0db657ae86e7a155f9961.bindTooltip(
+                `<div>
+                     17. Chez Juliette, proche Place Nationale avec parking
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_d92e44c41c320e2a5bb08231cb96f15e = L.marker(
+                [43.9925835, 1.3549991],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_af4ba627aaf727d275d04c920d3918e4 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e17\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_d92e44c41c320e2a5bb08231cb96f15e.setIcon(div_icon_af4ba627aaf727d275d04c920d3918e4);
+            
+    
+            var circle_marker_fefaacc4cbd1ee07ae95036a8f68b605 = L.circleMarker(
+                [43.5298424, 5.4474738],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_4ce1a74d7f40791794ba887af131fb50 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_7e4c4caa89ad70b3e21e72e618703034 = $(`<div id="html_7e4c4caa89ad70b3e21e72e618703034" style="width: 100.0%; height: 100.0%;"><b>#18 Appartement des Augustins</b><br>Ville : Aix en Provence<br>Score : 9.2<br><a href='https://www.booking.com/hotel/fr/appart-des-augustins.fr.html?aid=304142&label=gen173nr-10CAQoggJCFnNlYXJjaF9haXggZW4gcHJvdmVuY2VIDVgEaE2IAQGYATO4ARfIAQzYAQPoAQH4AQGIAgGoAgG4AsqQrNAGwAIB0gIkMDM0NjdiYWYtMzZhNC00NmJhLWJkODctYzIzMjkwZDYxM2I12AIB4AIB&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=2&hapos=2&sr_order=popularity&srpvid=921f58e5246b061f&srepoch=1779107919&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_4ce1a74d7f40791794ba887af131fb50.setContent(html_7e4c4caa89ad70b3e21e72e618703034);
+            
+        
+
+        circle_marker_fefaacc4cbd1ee07ae95036a8f68b605.bindPopup(popup_4ce1a74d7f40791794ba887af131fb50)
+        ;
+
+        
+    
+    
+            circle_marker_fefaacc4cbd1ee07ae95036a8f68b605.bindTooltip(
+                `<div>
+                     18. Appartement des Augustins
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_93f27765874b863de2958fa5f8e4d5e9 = L.marker(
+                [43.5298424, 5.4474738],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_3f8e9c7c61685801d54c35ef8e81a49c = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e18\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_93f27765874b863de2958fa5f8e4d5e9.setIcon(div_icon_3f8e9c7c61685801d54c35ef8e81a49c);
+            
+    
+            var circle_marker_203ec694b19d214759f30c0d4495beb6 = L.circleMarker(
+                [48.584614, 7.7507127],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_90c972a71b94395485ee543cab761202 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_dd5f2ea90ed00630bef2934c091e65b5 = $(`<div id="html_dd5f2ea90ed00630bef2934c091e65b5" style="width: 100.0%; height: 100.0%;"><b>#19 Strasbourg Centre Epine</b><br>Ville : Strasbourg<br>Score : 9.1<br><a href='https://www.booking.com/hotel/fr/strasbourg-centre-epine.fr.html?aid=304142&label=gen173nr-10CAQoggJCGXNlYXJjaF9zdHJhc2JvdXJnLCBmcmFuY2VIDVgEaE2IAQGYATO4ARfIAQzYAQPoAQH4AQGIAgGoAgG4Ar7ltM8GwAIB0gIkMjBmODk5OTMtZjgzMS00OTEwLWI2NTItZmJjNDgyMzA2Zjlh2AIB4AIB&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=6&hapos=6&sr_order=popularity&srpvid=3832975f82c00098&srepoch=1777152703&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_90c972a71b94395485ee543cab761202.setContent(html_dd5f2ea90ed00630bef2934c091e65b5);
+            
+        
+
+        circle_marker_203ec694b19d214759f30c0d4495beb6.bindPopup(popup_90c972a71b94395485ee543cab761202)
+        ;
+
+        
+    
+    
+            circle_marker_203ec694b19d214759f30c0d4495beb6.bindTooltip(
+                `<div>
+                     19. Strasbourg Centre Epine
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_7950cac42c4b61844f81ed97f711c6da = L.marker(
+                [48.584614, 7.7507127],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_7b4208d34c24d58a4a6d445e86452af2 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e19\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_7950cac42c4b61844f81ed97f711c6da.setIcon(div_icon_7b4208d34c24d58a4a6d445e86452af2);
+            
+    
+            var circle_marker_bdc79424f3b8f5ff8cdfafc4602db932 = L.circleMarker(
+                [43.4945144, -1.4736657],
+                {"bubblingMouseEvents": true, "color": "cadetblue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+        var popup_9e5cb5f53220f34fdd525021c507f304 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_b4ba703ceb5ed73add9ac9d9e7bdc7fa = $(`<div id="html_b4ba703ceb5ed73add9ac9d9e7bdc7fa" style="width: 100.0%; height: 100.0%;"><b>#20 Izabel Etxea</b><br>Ville : Bayonne<br>Score : 9.1<br><a href='https://www.booking.com/hotel/fr/izabel-etxea.fr.html?aid=304142&label=gen173nr-10CAQoggJCFnNlYXJjaF9iYXlvbm5lLCBmcmFuY2VIDVgEaE2IAQGYATO4ARfIAQzYAQPoAQH4AQGIAgGoAgG4AreXrNAGwAIB0gIkYWM5M2E3ZjUtYmQxYy00MzFlLWE4NTUtNjM2M2Q0MTgzMzAy2AIB4AIB&ucfs=1&arphpl=1&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=7&hapos=7&sr_order=popularity&srpvid=b2305a9b1c7707b1&srepoch=1779108794&from=searchresults' target='_blank'>Voir sur Booking</a></div>`)[0];
+                popup_9e5cb5f53220f34fdd525021c507f304.setContent(html_b4ba703ceb5ed73add9ac9d9e7bdc7fa);
+            
+        
+
+        circle_marker_bdc79424f3b8f5ff8cdfafc4602db932.bindPopup(popup_9e5cb5f53220f34fdd525021c507f304)
+        ;
+
+        
+    
+    
+            circle_marker_bdc79424f3b8f5ff8cdfafc4602db932.bindTooltip(
+                `<div>
+                     20. Izabel Etxea
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_8f396b9538779e2bb7a6e8750a4637e1 = L.marker(
+                [43.4945144, -1.4736657],
+                {
+}
+            ).addTo(map_0105af4f547e50baa36228ff32f64d06);
+        
+    
+            var div_icon_575a30825fadbc7e3f41175134113510 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:11px;font-weight:bold;text-align:center;width:18px;height:18px;line-height:18px;background:white;border:1px solid black;border-radius:50%;\"\u003e20\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_8f396b9538779e2bb7a6e8750a4637e1.setIcon(div_icon_575a30825fadbc7e3f41175134113510);
+            
+    
+            map_0105af4f547e50baa36228ff32f64d06.fitBounds(
+                [[43.1506968, 6.3761958511015315], [43.175811536709745, 6.361803563638888], [43.17927563832489, 6.319312048272989], [43.1506968, 6.307661148898468], [43.12558206329025, 6.322053436361112], [43.12211796167511, 6.3645449517270105], [43.9492493, 4.8406256010145015], [43.974364036709744, 4.785761047411589], [43.92067046167511, 4.782983095330429], [43.8374249, 4.394727959117799], [43.866424900000005, 4.3600687], [43.8374249, 4.314318477964506], [43.8124249, 4.3600687], [44.0175835, 1.3897634941950892], [44.046583500000004, 1.3549991], [44.0175835, 1.309110099662482], [43.9925835, 1.3549991], [43.5298424, 5.4474738], [48.584614, 7.7507127], [43.4945144, -1.4736657]],
+                {"padding": [40, 40]}
+            );
+        
+</script>
+</html>

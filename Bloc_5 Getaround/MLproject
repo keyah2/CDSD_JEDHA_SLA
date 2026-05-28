@@ -1,0 +1,7 @@
+name: getaround_pricing_training
+
+entry_points:
+  train:
+    command: "python src/train_model.py --input_path data/get_around_pricing_project.csv --output_model_path models/getaround_pricing_pipeline.joblib"
+  analyze:
+    command: "python src/analyze_delays.py --output_csv data/threshold_simulation.csv --output_json data/business_summary.json"

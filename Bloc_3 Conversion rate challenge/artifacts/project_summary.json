@@ -1,0 +1,19 @@
+{
+  "train_shape": [
+    284580,
+    6
+  ],
+  "test_shape": [
+    31620,
+    5
+  ],
+  "conversion_rate": 0.0322580645,
+  "logreg_f1_default_0.5": 0.7645446238,
+  "logreg_best_threshold": 0.44,
+  "logreg_f1_tuned": 0.7770588235,
+  "logreg_precision_tuned": 0.844629156,
+  "logreg_recall_tuned": 0.7194989107,
+  "adaboost_f1_tuned": 0.7414947763,
+  "submission_path": "artifacts/conversion_rate_test_predictions.csv",
+  "coefficients_path": "artifacts/logistic_coefficients.csv"
+}

@@ -1,0 +1,69 @@
+# ── Environnements virtuels ──────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── Python ───────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# ── Jupyter ──────────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ── TensorFlow / modèles sauvegardés ─────────────────────
+*.h5
+*.keras
+*.pb
+saved_model/
+tfhub_cache/
+
+# ── OS ───────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Claude Code ──────────────────────────────────────────
+.claude/
+
+# ── Éditeurs ─────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Fichiers temporaires ─────────────────────────────────
+*.tmp
+*.temp
+*.log
+*.bak
+
+# ── Archives ─────────────────────────────────────────────
+*.zip
+*.7z
+*.rar
+*.tar.gz
+*.gz
+
+# ── Secrets / credentials ────────────────────────────────
+.env
+.env.*
+*.pem
+*.key
+secrets.json
+credentials.json
+
+# ── Sorties locales ──────────────────────────────────────
+outputs/
+artifacts/
+figures/
+
+# ── Données lourdes (à ne pas versionner si trop volumineuses) ──
+# data/*.csv   # décommenter si le dataset est trop lourd pour GitHub

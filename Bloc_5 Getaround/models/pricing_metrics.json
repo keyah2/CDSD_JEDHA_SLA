@@ -1,0 +1,92 @@
+{
+  "best_model": "RandomForest",
+  "holdout_metrics": [
+    {
+      "model": "RandomForest",
+      "MAE": 10.753925375885435,
+      "RMSE": 16.949692965744838,
+      "R2": 0.7272259677294435
+    },
+    {
+      "model": "ExtraTrees",
+      "MAE": 10.717361600555467,
+      "RMSE": 17.002991420458976,
+      "R2": 0.7255077899959173
+    },
+    {
+      "model": "LinearRegression",
+      "MAE": 13.057800855803793,
+      "RMSE": 19.049378446289133,
+      "R2": 0.6554589505984064
+    },
+    {
+      "model": "Ridge",
+      "MAE": 15.38105083392694,
+      "RMSE": 21.914784079885656,
+      "R2": 0.5440116526505578
+    }
+  ],
+  "chosen_model_metrics": {
+    "model": "RandomForest",
+    "MAE": 10.753925375885435,
+    "RMSE": 16.949692965744838,
+    "R2": 0.7272259677294435
+  },
+  "feature_order": [
+    "model_key",
+    "mileage",
+    "engine_power",
+    "fuel",
+    "paint_color",
+    "car_type",
+    "private_parking_available",
+    "has_gps",
+    "has_air_conditioning",
+    "automatic_car",
+    "has_getaround_connect",
+    "has_speed_regulator",
+    "winter_tires"
+  ],
+  "top_features": [
+    {
+      "feature": "engine_power",
+      "importance": 0.45349482686340287
+    },
+    {
+      "feature": "mileage",
+      "importance": 0.2830579344113572
+    },
+    {
+      "feature": "model_key",
+      "importance": 0.06891456801301013
+    },
+    {
+      "feature": "has_gps",
+      "importance": 0.04229617990492236
+    },
+    {
+      "feature": "car_type",
+      "importance": 0.04130596280981758
+    },
+    {
+      "feature": "has_getaround_connect",
+      "importance": 0.028687861357697284
+    },
+    {
+      "feature": "paint_color",
+      "importance": 0.028258653888341843
+    },
+    {
+      "feature": "fuel",
+      "importance": 0.014352059951803407
+    },
+    {
+      "feature": "automatic_car",
+      "importance": 0.011396172820077754
+    },
+    {
+      "feature": "winter_tires",
+      "importance": 0.00759023703707529
+    }
+  ]
+}

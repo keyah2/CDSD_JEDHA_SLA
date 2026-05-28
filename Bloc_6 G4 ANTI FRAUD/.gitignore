@@ -1,0 +1,63 @@
+# Environnements et secrets
+.env
+.env.*
+!.env.example
+*secret*
+*credentials*
+*token*
+*password*
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Données lourdes ou brutes
+assets/X_test_app.csv
+assets/y_test_app.csv
+assets/X_test_app.zip
+transactions.csv
+data/transactions.csv
+data/raw/
+data/interim/
+*.parquet
+*.feather
+
+# Modèles lourds / artefacts binaires
+models/*.pkl
+models/*.joblib
+assets/*.pkl
+assets/*.joblib
+*.pkl
+*.joblib
+*.onnx
+
+# MLflow
+mlflow.db
+mlruns/
+
+# Logs et exports temporaires
+logs/
+mlruns/
+outputs/
+reports/tmp/
+*.log
+*.tmp
+
+# Système
+.DS_Store
+Thumbs.db
+
+# Screenshots de l'app (non nécessaires au dépôt)
+images/

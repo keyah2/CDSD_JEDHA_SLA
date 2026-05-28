@@ -1,0 +1,10 @@
+pandas
+numpy
+matplotlib
+scikit-learn
+tensorflow==2.21.0
+tensorflow-hub==0.16.1
+tf-keras
+setuptools==69.5.1
+jupyter
+nbformat

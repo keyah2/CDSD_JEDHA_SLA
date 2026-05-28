@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environnements
+.env
+.venv/
+venv/
+env/
+
+# Données et archives locales
+uber-trip-data.zip
+*.zip
+
+# Supports de cours et éléments à garder hors dépôt
+PROJETS UBER.pdf
+Cours sur Uber Machine learning*
+BLOC 3 _UBER.zip
+BLOC 3_PROJET_UBER_ Jedha Birane.zip
+
+# Fichiers système
+.DS_Store
+Thumbs.db

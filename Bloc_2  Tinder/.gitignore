@@ -1,0 +1,23 @@
+# ── Python ────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# ── Environnements virtuels ───────────────────────────────────────
+.venv/
+venv/
+env/
+
+# ── Variables d'environnement ─────────────────────────────────────
+.env
+.env.local
+
+# ── IDE ───────────────────────────────────────────────────────────
+.idea/
+.vscode/
+
+# ── OS ────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini

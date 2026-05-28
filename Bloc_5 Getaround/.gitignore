@@ -1,0 +1,45 @@
+# Environnements et secrets
+.env
+.env.*
+*.pem
+*.key
+*.secret
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Archives et exports locaux
+*.zip
+*.tar
+*.gz
+
+# Logs
+*.log
+
+# Dossiers locaux optionnels
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+
+# Artifacts de modèle trop lourds pour GitHub
+models/*.joblib
+
+# Artefacts générés (recréés via make analyze / make train)
+assets/*.png
+data/business_summary.json
+data/threshold_simulation.csv

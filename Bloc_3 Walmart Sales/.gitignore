@@ -1,0 +1,62 @@
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# ── Jupyter ───────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+# On ignore les outputs des notebooks exécutés pour alléger le dépôt.
+# Pour partager avec outputs : committer le fichier _executed.ipynb manuellement.
+
+# ── Environnements virtuels ───────────────────────────────────────────────────
+.env
+.venv/
+venv/
+env/
+*.egg-info/
+
+# ── Modèles et fichiers générés ───────────────────────────────────────────────
+*.pkl
+*.joblib
+*.h5
+*.onnx
+outputs/
+figures/
+# Fichiers CSV intermédiaires générés automatiquement (ex: dataset nettoyé)
+*_simplified_dataset.csv
+*_clean_export.csv
+
+# ── OS / éditeurs ─────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Archives et exports ───────────────────────────────────────────────────────
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.html
+*.pdf
+
+# ── Fichiers de cours / brouillons / confidentiels ───────────────────────────
+Cours du projet.zip
+course/
+*premium*
+*jury*
+*oral*
+Guide_V2_ameliorations_et_oral.md
+NOTES_PERSO*.md
+brouillon*/
+draft*/
+
+# ── Logs et fichiers temporaires ──────────────────────────────────────────────
+*.log
+*.tmp
+*.bak
+mlruns/
