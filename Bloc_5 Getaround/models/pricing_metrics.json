@@ -15,9 +15,9 @@
     },
     {
       "model": "LinearRegression",
-      "MAE": 13.057800855803793,
-      "RMSE": 19.049378446289133,
-      "R2": 0.6554589505984064
+      "MAE": 13.057800855803585,
+      "RMSE": 19.04937844628264,
+      "R2": 0.6554589505986415
     },
     {
       "model": "Ridge",
@@ -50,7 +50,7 @@
   "top_features": [
     {
       "feature": "engine_power",
-      "importance": 0.45349482686340287
+      "importance": 0.4534948268634028
     },
     {
       "feature": "mileage",
@@ -62,31 +62,31 @@
     },
     {
       "feature": "has_gps",
-      "importance": 0.04229617990492236
+      "importance": 0.042296179904922356
     },
     {
       "feature": "car_type",
-      "importance": 0.04130596280981758
+      "importance": 0.041305962809817576
     },
     {
       "feature": "has_getaround_connect",
-      "importance": 0.028687861357697284
+      "importance": 0.02868786135769728
     },
     {
       "feature": "paint_color",
-      "importance": 0.028258653888341843
+      "importance": 0.028258653888341836
     },
     {
       "feature": "fuel",
-      "importance": 0.014352059951803407
+      "importance": 0.014352059951803404
     },
     {
       "feature": "automatic_car",
-      "importance": 0.011396172820077754
+      "importance": 0.011396172820077752
     },
     {
       "feature": "winter_tires",
-      "importance": 0.00759023703707529
+      "importance": 0.0075902370370752896
     }
   ]
 }

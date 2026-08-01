@@ -31,11 +31,14 @@ CUSTOM_CSS = """
 }
 .soft-card {
     background: #f8fafc;
+    color: #0f172a;
     border: 1px solid #e2e8f0;
     border-radius: 16px;
     padding: 1rem 1.1rem;
     margin-bottom: 0.8rem;
 }
+.soft-card h4 {color: #0f172a;}
+.soft-card code {background: #e2e8f0; color: #0f172a; padding: 0.1rem 0.35rem; border-radius: 4px;}
 .small-note {color: #475569; font-size: 0.92rem;}
 .badge {
     display: inline-block;

@@ -6,6 +6,7 @@ from typing import Any
 import joblib
 import pandas as pd
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel, Field
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -112,14 +113,9 @@ app = FastAPI(
 )
 
 
-@app.get("/", tags=["Santé"])
+@app.get("/", tags=["Santé"], include_in_schema=False)
 async def index():
-    return {
-        "message": "Bienvenue sur l’API de prédiction de prix GetAround.",
-        "docs": "/docs",
-        "predict_endpoint": "/predict",
-        "metadata_endpoint": "/metadata",
-    }
+    return RedirectResponse(url="/docs")
 
 
 @app.get("/health", tags=["Santé"])

@@ -7,16 +7,13 @@ import json
 import matplotlib.pyplot as plt
 import os
 import base64
-import requests
 import time
-import shutil
 from pathlib import Path
 from io import BytesIO
 
-# --- CONFIG FICHIERS PUBLICS ---
-# Les artefacts volumineux peuvent être téléchargés depuis un espace public S3.
-BUCKET_URL = "https://pac-jedha-bucket.s3.amazonaws.com/G4"
-LOCAL_ASSETS_DIR = Path("assets")
+MODEL_PATH = Path("models/fraud_xgb_model.pkl")
+DATA_DIR = Path("data")
+ASSETS_DIR = Path("assets")
 
 # --- 1. CONFIGURATION DE LA PAGE ---
 st.set_page_config(
@@ -104,6 +101,30 @@ def get_definition(feature_name):
     if str(feature_name).startswith("merchant_category_"): return f"Cat : {feature_name.split('_')[2]}"
     return feature_name
 
+RISK_SCALE = [
+    (0.30, "🟢 RISQUE FAIBLE (< 30%)", "#00e5ff", "Transaction approuvée automatiquement."),
+    (0.70, "🟡 RISQUE MODÉRÉ (30-70%)", "#f5c542", "Vérification légère (OTP, confirmation par e-mail/SMS ou contrôle automatique complémentaire)."),
+    (0.95, "🟠 RISQUE ÉLEVÉ (70-95%)", "#ff8c42", "Transaction mise en attente et soumise à une revue manuelle par un analyste."),
+    (1.01, "🔴 RISQUE CRITIQUE (> 95%)", "#ff2b2b", "Transaction bloquée immédiatement et compte/transaction signalé pour investigation."),
+]
+
+def format_score(p):
+    """Convertit un score de probabilité en niveau de risque qualitatif (jamais de
+    pourcentage brut affiché), sur le modèle des outils anti-fraude professionnels."""
+    for threshold, label, _, _ in RISK_SCALE:
+        if p < threshold: return label
+    return RISK_SCALE[-1][1]
+
+def risk_color(p):
+    for threshold, _, color, _ in RISK_SCALE:
+        if p < threshold: return color
+    return RISK_SCALE[-1][2]
+
+def risk_action(p):
+    for threshold, _, _, action in RISK_SCALE:
+        if p < threshold: return action
+    return RISK_SCALE[-1][3]
+
 # --- 4. ETAT ---
 if 'p1_data' not in st.session_state: st.session_state['p1_data'] = None
 if 'p1_tx_id' not in st.session_state: st.session_state['p1_tx_id'] = None
@@ -111,65 +132,21 @@ if 'p1_true_label' not in st.session_state: st.session_state['p1_true_label'] = 
 if 'p2_reset_counter' not in st.session_state: st.session_state['p2_reset_counter'] = 0
 
 # --- 5. FONCTIONS MÉTIER ---
-def _is_git_lfs_pointer(path):
-    """Détecte un pointeur Git LFS à la place d'un vrai artefact binaire."""
-    try:
-        with open(path, "rb") as f:
-            head = f.read(120)
-        return head.startswith(b"version https://git-lfs.github.com/spec")
-    except Exception:
-        return False
-
-
-def download_from_s3(filename):
-    """Garantit la présence locale d'un artefact requis par l'application.
-
-    L'application peut fonctionner avec des fichiers locaux placés à la racine ou dans
-    `assets/`. Si le fichier est absent, ou si le fichier local est seulement un
-    pointeur Git LFS, il est retéléchargé depuis l'emplacement public configuré.
-    """
-    target = Path(filename)
-    local_asset = LOCAL_ASSETS_DIR / filename
-
-    if target.exists() and not _is_git_lfs_pointer(target):
-        return
-
-    if local_asset.exists() and not _is_git_lfs_pointer(local_asset):
-        try:
-            shutil.copyfile(local_asset, target)
-            return
-        except Exception:
-            pass
-
-    url = f"{BUCKET_URL}/{filename}"
-    try:
-        response = requests.get(url, timeout=30)
-        if response.status_code == 200:
-            with open(target, "wb") as f:
-                f.write(response.content)
-    except Exception:
-        pass
-
 @st.cache_resource
 def load_model_data():
-    filename = "fraud_xgb_model.pkl"
-    download_from_s3(filename)
-    try:
-        with open(filename, "rb") as f: data = pickle.load(f)
-        model = data['model'] if isinstance(data, dict) and 'model' in data else data
-        features = data['final_columns'] if isinstance(data, dict) and 'final_columns' in data else getattr(model, "feature_names_in_", None)
-        return model, features
-    except Exception: return None, None
+    with open(MODEL_PATH, "rb") as f:
+        data = pickle.load(f)
+    model = data['model'] if isinstance(data, dict) and 'model' in data else data
+    features = data['final_columns'] if isinstance(data, dict) and 'final_columns' in data else getattr(model, "feature_names_in_", None)
+    return model, features
 
 @st.cache_data
 def load_full_test_data():
-    download_from_s3("X_test_app.csv"); download_from_s3("y_test_app.csv")
-    try:
-        X = pd.read_csv("X_test_app.csv", index_col=0); y = pd.read_csv("y_test_app.csv")
-        if y.shape[1] > 1: y.set_index(y.columns[0], inplace=True)
-        y = y.iloc[:, 0]; y.index = X.index
-        return X, y
-    except Exception: return None, None
+    X = pd.read_csv(DATA_DIR / "X_test_app.csv", index_col=0)
+    y = pd.read_csv(DATA_DIR / "y_test_app.csv")
+    if y.shape[1] > 1: y.set_index(y.columns[0], inplace=True)
+    y = y.iloc[:, 0]; y.index = X.index
+    return X, y
 
 @st.cache_data
 def get_global_shap_importance(_model, X_reference):
@@ -228,6 +205,7 @@ def action_global_reset():
 def main():
     st.markdown("<h1>DÉTECTION DE FRAUDE &mdash; GROUPE 4</h1>", unsafe_allow_html=True)
     st.markdown("<div class='subtitle'>Application d'aide à l'analyse des transactions</div>", unsafe_allow_html=True)
+    st.markdown("<div style='text-align:center; color:#7fa8b8; font-size:0.85rem; letter-spacing:1px; margin-top:-30px; margin-bottom:30px; opacity:0.75;'>Projet pour JEDHA — Lartigue Sébastien / Selma Rochet / Birane Wane</div>", unsafe_allow_html=True)
     model, model_features = load_model_data()
     X_ref, _ = load_full_test_data()
     
@@ -248,15 +226,13 @@ def main():
         batch_file = st.file_uploader("Upload Test Dataset CSV", type=["csv"], key=f"batch_{uploader_key}", label_visibility="collapsed")
 
     with col_mid:
-        st.markdown("<br><br><br>", unsafe_allow_html=True) 
-        img_path = "logo_G4.jpg"
-        download_from_s3(img_path)
-        if not os.path.exists(img_path): 
-            img_path = "logo_G4_antifraude.jpg"
-            download_from_s3(img_path)
-        
+        st.markdown("<br><br><br>", unsafe_allow_html=True)
+        img_path = ASSETS_DIR / "logo_g4.jpg"
+        if not img_path.exists():
+            img_path = ASSETS_DIR / "logo_G4_antifraude.jpg"
+
         b64_img = ""
-        if os.path.exists(img_path):
+        if img_path.exists():
             with open(img_path, "rb") as f: b64_img = base64.b64encode(f.read()).decode()
         if b64_img:
             st.markdown(f"""<style>div[data-testid="stVerticalBlock"] > div:has(span#logo-trigger) + div button {{ background-image: url('data:image/jpeg;base64,{b64_img}'); background-size: contain; background-repeat: no-repeat; background-position: center; background-color: transparent !important; border: none !important; color: transparent !important; height: 120px; width: 100%; box-shadow: none !important; cursor: pointer; mix-blend-mode: screen; }} div[data-testid="stVerticalBlock"] > div:has(span#logo-trigger) + div button:hover {{ transform: scale(1.05); filter: drop-shadow(0 0 10px #00e5ff); }} div[data-testid="stVerticalBlock"] > div:has(span#logo-trigger) + div button p {{ display: none; }} </style>""", unsafe_allow_html=True)
@@ -268,9 +244,6 @@ def main():
     with col_right:
         st.markdown("<div class='col-header'>1. SIMULATION INTERNE</div>", unsafe_allow_html=True)
         st.button("GENERATE LEGIT", key="btn_legit", use_container_width=True, on_click=action_generate_legit)
-        st.markdown("<br><br>", unsafe_allow_html=True)
-        st.markdown("<div class='col-header'>2. VÉRITÉ TERRAIN JSON</div>", unsafe_allow_html=True)
-        t_file = st.file_uploader("Drop Truth JSON", type=["json"], key=f"targ_{uploader_key}", label_visibility="collapsed")
 
     if batch_file is not None and model:
         try:
@@ -288,13 +261,21 @@ def main():
             df_batch['Fraud_Probability'] = probs
             frauds_detected = df_batch[df_batch['Fraud_Probability'] > 0.30].copy()
             
+            total_tx = len(df_batch)
+            nb_alertes = len(frauds_detected)
+
             st.markdown("<h3 style='color:#ff2b2b;'>Résultats de l'Audit de Masse</h3>", unsafe_allow_html=True)
+            cols = st.columns(2)
+            cols[0].metric("Transactions analysées", f"{total_tx:,}".replace(",", " "))
+            cols[1].metric("Alertes critiques", f"{nb_alertes:,}".replace(",", " "))
+
             with st.expander(f"🔍 Voir les {len(frauds_detected)} alertes critiques détectées", expanded=True):
                 if not frauds_detected.empty:
                     display_df = consolidate_ohe_for_display(frauds_detected)
                     prio_cols = ['amount', 'Fraud_Probability', 'Pays Client', 'Pays Banque', 'Catégorie', 'Canal', 'security_mismatch_score']
                     cols_to_show = [c for c in prio_cols if c in display_df.columns]
-                    st.dataframe(display_df[cols_to_show].sort_values('Fraud_Probability', ascending=False).style.background_gradient(cmap='Reds', subset=['Fraud_Probability']).format("{:.1%}", subset=['Fraud_Probability']), use_container_width=True)
+                    display_df = display_df[cols_to_show].sample(frac=1.0, random_state=None).reset_index(drop=True).rename(columns={'Fraud_Probability': 'Niveau de risque'})
+                    st.dataframe(display_df.style.background_gradient(cmap='Reds', subset=['Niveau de risque']).format(format_score, subset=['Niveau de risque']), use_container_width=True)
                     total_loss = frauds_detected['amount'].sum()
                     st.markdown(f"""<div style='background: rgba(255, 43, 43, 0.2); border: 2px solid #ff2b2b; padding: 20px; border-radius: 10px; text-align: center; margin-top: 20px;'> <h3 style='margin:0; color:#fff;'>PERTE POTENTIELLE TOTALE ÉVITÉE</h3> <h2 style='margin:0; color:#ff2b2b; font-size: 2.5rem;'>$ {total_loss:,.2f}</h2> </div>""", unsafe_allow_html=True)
                 else:
@@ -309,7 +290,6 @@ def main():
             input_json = json.load(f_file); tx_id = input_json.get('transaction_id', 'Unknown')
             clean_input = {k:v for k,v in input_json.items() if k not in ['transaction_id', 'transaction_id_check', 'ground_truth_label']}
             row_data, ctx = pd.DataFrame([clean_input]), "AUDIT EXTERNE"
-            if t_file: tj = json.load(t_file); true_label = tj.get('actual_label', tj.get('ground_truth_label'))
         except: st.error("Erreur JSON")
 
     if row_data is not None and model:
@@ -324,11 +304,11 @@ def run_analysis(row_data, model, model_features, tx_id, true_label, context, gl
 
     is_fraud = proba > 0.30
     color_res = "#ff2b2b" if is_fraud else "#00e5ff"
-    text_res = "🚨 FRAUDE DÉTECTÉE" if is_fraud else "✅ TRANSACTION LÉGITIME"
+    text_res = "⚠️ RISQUE DE FRAUDE" if is_fraud else "✅ TRANSACTION LÉGITIME"
 
     c_data, c_viz = st.columns([1, 2])
     with c_data:
-        st.markdown(f"<div class='result-card' style='border-color: {color_res};'><h2 style='text-align:center; color: {color_res}; margin:0;'>{text_res}</h2><p style='text-align:center;'>Score: <b>{proba:.1%}</b></p></div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='result-card' style='border-color: {color_res};'><h2 style='text-align:center; color: {color_res}; margin:0;'>{text_res}</h2><p style='text-align:center;'>Niveau de risque: <b style='color:{risk_color(proba)}'>{format_score(proba)}</b></p><p style='text-align:center; font-size:0.9rem; opacity:0.85; margin-top:8px;'>Action conseillée : <b>{risk_action(proba)}</b></p></div>", unsafe_allow_html=True)
         if true_label is not None:
             lbl = int(true_label)
             match = (lbl == 1 and is_fraud) or (lbl == 0 and not is_fraud)

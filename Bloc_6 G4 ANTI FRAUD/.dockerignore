@@ -7,14 +7,13 @@ __pycache__/
 .env
 .env.*
 notebooks/
-data/
+pres/
 docs/
 images/
 *.ipynb
-*.csv
 *.zip
-*.pkl
-*.joblib
 logs/
 mlruns/
 outputs/
+transactions.csv
+data/transactions.csv

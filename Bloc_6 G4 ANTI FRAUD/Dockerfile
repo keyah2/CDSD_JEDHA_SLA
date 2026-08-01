@@ -17,7 +17,6 @@ WORKDIR $HOME/app
 # On le fait avant de copier le reste du code pour profiter du cache Docker
 COPY --chown=user requirements.txt $HOME/app/requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install --no-cache-dir scikit-learn xgboost==2.0.3
 
 # 4. Copier le reste du code
 COPY --chown=user . $HOME/app
@@ -28,13 +27,10 @@ EXPOSE 7860
 # Configurer Streamlit pour qu'il s'exécute correctement dans le container
 ENV STREAMLIT_SERVER_PORT=7860
 ENV STREAMLIT_SERVER_ADDRESS=0.0.0.0
-
-# Configurer Streamlit via variables d'environnement (plus propre)
-ENV STREAMLIT_SERVER_PORT=7860
-ENV STREAMLIT_SERVER_ADDRESS=0.0.0.0
-ENV STREAMLIT_SERVER_ENABLE_CORS=false
+ENV STREAMLIT_SERVER_HEADLESS=true
 ENV STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION=false
+ENV STREAMLIT_SERVER_ENABLE_CORS=false
 
 # Lancer l'application avec les bonnes options
-CMD ["streamlit", "run", "app.py", "--server.port=7860", "--server.address=0.0.0.0", "--server.enableCORS=false", "--server.enableXsrfProtection=false"]
+CMD ["streamlit", "run", "app.py", "--server.port=7860", "--server.address=0.0.0.0", "--server.headless=true", "--server.enableXsrfProtection=false", "--server.enableCORS=false"]
 
