@@ -27,3 +27,4 @@ Ce dépôt regroupe l'ensemble des projets réalisés dans le cadre du cursus **
 - **MLOps** : MLflow, FastAPI, Docker
 - **Visualisation** : Streamlit, Plotly, Folium
 - **Données** : pandas, NumPy, requests, BeautifulSoup
+

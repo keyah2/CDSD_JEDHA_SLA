@@ -92,3 +92,4 @@ Ouvrir `notebooks/uber_hotzones_clean.ipynb` et placer `uber-trip-data.zip` dans
 ## Stack technique
 
 Python · pandas · numpy · scikit-learn · plotly · jupyter
+

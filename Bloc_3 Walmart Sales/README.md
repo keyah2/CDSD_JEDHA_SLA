@@ -160,3 +160,4 @@ Puis ouvrir `Notebooks/walmart_weekly_sales_executed.ipynb` et exécuter les cel
 - Matplotlib, Seaborn
 - scikit-learn
 - Jupyter Notebook
+
